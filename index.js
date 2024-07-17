@@ -28,7 +28,8 @@ return svgContent;
 const init = () => {
   promptUser()
   .then (answers => {
-    const svgContent = generateSVG(answers);
+    const {text,textColor,shape,shapeColor} = answers
+    const svgContent = generateSVG(text,textColor,shape,shapeColor);
     fs.writeFileSync(path.join(__dirname,'examples','logo.svg'), svgContent);
     console.log('Generated logo.svg');
   })
