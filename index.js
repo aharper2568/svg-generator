@@ -24,3 +24,17 @@ const generateSVG = ( text, textColor, shape, shapeColor ) => {
 
 return svgContent;
 };
+
+const init = () => {
+  promptUser()
+  .then (answers => {
+    const svgContent = generateSVG(answers);
+    fs.writeFileSync(path.join(__dirname,'examples','logo.svg'), svgContent);
+    console.log('Generated logo.svg');
+  })
+  .catch(error => {
+    console.error('Error generating SVG:', error);
+  })
+}
+
+init();
