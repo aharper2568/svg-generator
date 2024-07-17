@@ -1,11 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const { Circle, Triangle, Square } = require('./lib/shapes');
-const { promptUser } = require('./lib/prompts');
+const fs = require('fs'); // file sys module reads and writes files
+const path = require('path'); // allows platform-independant path handling
+const { Circle, Triangle, Square } = require('./lib/shapes'); //import shape classes
+const { promptUser } = require('./lib/prompts'); 
 
-const generateSVG = ( text, textColor, shape, shapeColor ) => {
+const generateSVG = ( text, textColor, shape, shapeColor ) => { // generate svg code based on user input
   let shapeInstance;
-
+// if else if statements to create new shape instance based on input
   if (shape === 'Circle') {
     shapeInstance = new Circle(shapeColor);
   } else if (shape === 'Triangle') {
@@ -15,6 +15,7 @@ const generateSVG = ( text, textColor, shape, shapeColor ) => {
   } else {
     throw new Error('Invalid shape');
   }
+  // svg content template  literal string
   const svgContent = `
   <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
     ${shapeInstance.render()}
@@ -24,7 +25,7 @@ const generateSVG = ( text, textColor, shape, shapeColor ) => {
 
 return svgContent;
 };
-
+ //init function to start the application
 const init = () => {
   promptUser()
   .then (answers => {
@@ -37,5 +38,5 @@ const init = () => {
     console.error('Error generating SVG:', error);
   })
 }
-
+// start application
 init();
